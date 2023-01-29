@@ -21,22 +21,35 @@ class SignUpVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let docRef = database.document("CalorieFriend/users")
+        docRef.getDocument { [weak self] snapshot, error in
+            guard let data = snapshot?.data(), error == nil else {
+                return
+            }
+            print(data)
+        }
     }
     
     @IBAction func signUpClicked(_ sender: UIButton) {
         let docRef = database.document("CalorieFriend/users")
-        
         guard let userName = name.text else { return }
         guard let userEmail = email.text else { return }
         guard let userPassword = password.text else { return }
         guard let userConfirmPassword = confirmPassword.text else { return }
         // TODO: Email, Password Confirmation VALIDATION
         
-        // if everything is valid, then we create account
+        // if everything is valid, then we create account and save account information in firestore
+        
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { firebaseResult, err in
             if let e = err { //if an error exists
                 print("error")
             } else{
+                // create a new user instance in firestore database
+                docRef.setData([
+                    userEmail : [
+                        "username": userName
+                    ]
+                ], merge: true)
                 // Go to home page
                 self.performSegue(withIdentifier: "signUpToHome", sender: self)
             }
