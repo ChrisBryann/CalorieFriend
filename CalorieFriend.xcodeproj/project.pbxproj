@@ -14,6 +14,7 @@
 		9303FA8A2986060500948145 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA892986060500948145 /* FirebaseAuthCombine-Community */; };
 		9303FA8C2986060500948145 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8B2986060500948145 /* FirebaseDatabase */; };
 		9303FA8E2986060500948145 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8D2986060500948145 /* FirebaseDatabaseSwift */; };
+		9303FA912986103100948145 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA902986103100948145 /* FirebaseFirestore */; };
 		93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */; };
 		93B77FAE2980C6B60023B6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B77FAD2980C6B60023B6E4 /* SceneDelegate.swift */; };
 		93B77FB32980C6B60023B6E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B77FB12980C6B60023B6E4 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 				9303FA8E2986060500948145 /* FirebaseDatabaseSwift in Frameworks */,
 				9303FA8C2986060500948145 /* FirebaseDatabase in Frameworks */,
 				9303FA882986060500948145 /* FirebaseAuth in Frameworks */,
+				9303FA912986103100948145 /* FirebaseFirestore in Frameworks */,
 				9303FA8A2986060500948145 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,11 +51,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9303FA8F2986103100948145 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		93B77F9F2980C6B60023B6E4 = {
 			isa = PBXGroup;
 			children = (
 				93B77FAA2980C6B60023B6E4 /* CalorieFriend */,
 				93B77FA92980C6B60023B6E4 /* Products */,
+				9303FA8F2986103100948145 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,9 +80,9 @@
 			children = (
 				93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */,
 				93B77FAD2980C6B60023B6E4 /* SceneDelegate.swift */,
-				93B77FB12980C6B60023B6E4 /* Main.storyboard */,
 				9303FA7E2985FC9600948145 /* LoginVC.swift */,
 				9303FA802985FD0F00948145 /* SignUpVC.swift */,
+				93B77FB12980C6B60023B6E4 /* Main.storyboard */,
 				93B77FB42980C6BA0023B6E4 /* Assets.xcassets */,
 				93B77FB62980C6BA0023B6E4 /* LaunchScreen.storyboard */,
 				93B77FB92980C6BA0023B6E4 /* Info.plist */,
@@ -102,6 +112,7 @@
 				9303FA892986060500948145 /* FirebaseAuthCombine-Community */,
 				9303FA8B2986060500948145 /* FirebaseDatabase */,
 				9303FA8D2986060500948145 /* FirebaseDatabaseSwift */,
+				9303FA902986103100948145 /* FirebaseFirestore */,
 			);
 			productName = CalorieFriend;
 			productReference = 93B77FA82980C6B60023B6E4 /* CalorieFriend.app */;
@@ -415,6 +426,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9303FA862986060500948145 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		9303FA902986103100948145 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9303FA862986060500948145 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

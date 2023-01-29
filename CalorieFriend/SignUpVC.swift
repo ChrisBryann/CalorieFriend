@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class SignUpVC: UIViewController {
 
@@ -14,6 +15,8 @@ class SignUpVC: UIViewController {
     @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var confirmPassword: UITextField!
+    
+    let database = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +24,8 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: UIButton) {
+        let docRef = database.document("CalorieFriend/users")
+        
         guard let userName = name.text else { return }
         guard let userEmail = email.text else { return }
         guard let userPassword = password.text else { return }
