@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i4V-P6-oNH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i4V-P6-oNH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -54,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-fO-wvg">
-                                <rect key="frame" x="30" y="305.5" width="354" height="226"/>
+                                <rect key="frame" x="30" y="301.5" width="354" height="226"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dL5-9b-nHM">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
@@ -81,6 +80,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="Login" cornerStyle="capsule"/>
+                                        <connections>
+                                            <action selector="loginClicked:" destination="i4V-P6-oNH" eventType="touchUpInside" id="g9p-0x-w2M"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyL-VQ-qFv">
                                         <rect key="frame" x="0.0" y="195" width="354" height="31"/>
@@ -96,7 +98,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calorie Friend" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-RV-C0p">
-                                <rect key="frame" x="40" y="78" width="334" height="167.5"/>
+                                <rect key="frame" x="40" y="74" width="334" height="167.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="70"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -114,6 +116,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T78-Dh-NaZ"/>
+                    <connections>
+                        <outlet property="email" destination="dL5-9b-nHM" id="W3D-1D-1l2"/>
+                        <outlet property="password" destination="dWy-r2-jaS" id="mAe-VG-yri"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fzp-aJ-GYc" sceneMemberID="firstResponder"/>
             </objects>
@@ -128,7 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uOT-rh-VCG">
-                                <rect key="frame" x="30" y="216" width="354" height="369.5"/>
+                                <rect key="frame" x="30" y="212" width="354" height="366"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4MK-9W-6aR">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
@@ -173,9 +179,12 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="Sign Up" cornerStyle="capsule"/>
+                                        <connections>
+                                            <action selector="signUpClicked:" destination="pXm-WG-Mc7" eventType="touchUpInside" id="F00-TG-Eai"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l87-Wb-mid">
-                                        <rect key="frame" x="0.0" y="335" width="354" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="335" width="354" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Already have an account? Login now!"/>
                                         <connections>
@@ -186,7 +195,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l93-M3-8Cc">
-                                <rect key="frame" x="40" y="78" width="334" height="78"/>
+                                <rect key="frame" x="40" y="74" width="334" height="78"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="65"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -204,6 +213,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GDN-s2-bEV"/>
+                    <connections>
+                        <outlet property="confirmPassword" destination="vlS-PC-MzG" id="xhj-yn-pz1"/>
+                        <outlet property="email" destination="kJV-zq-bzE" id="FIB-Cn-Zzv"/>
+                        <outlet property="name" destination="4MK-9W-6aR" id="4Xu-6H-CUY"/>
+                        <outlet property="password" destination="MBN-TK-cyr" id="IWO-Ri-vOz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qde-lT-AQg" sceneMemberID="firstResponder"/>
             </objects>

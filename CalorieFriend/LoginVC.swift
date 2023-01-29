@@ -9,13 +9,18 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    @IBOutlet var email: UITextField!
+    @IBOutlet var password: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func loginClicked(_ sender: UIButton) {
+    }
+    
+    
     /*
     // MARK: - Navigation
 
