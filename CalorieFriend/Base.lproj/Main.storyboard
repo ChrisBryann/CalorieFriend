@@ -120,6 +120,7 @@
                     <connections>
                         <outlet property="email" destination="dL5-9b-nHM" id="W3D-1D-1l2"/>
                         <outlet property="password" destination="dWy-r2-jaS" id="mAe-VG-yri"/>
+                        <segue destination="uFn-57-d4J" kind="presentation" identifier="loginToHome" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="dY0-nk-0BO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fzp-aJ-GYc" sceneMemberID="firstResponder"/>
@@ -219,6 +220,7 @@
                         <outlet property="email" destination="kJV-zq-bzE" id="FIB-Cn-Zzv"/>
                         <outlet property="name" destination="4MK-9W-6aR" id="4Xu-6H-CUY"/>
                         <outlet property="password" destination="MBN-TK-cyr" id="IWO-Ri-vOz"/>
+                        <segue destination="uFn-57-d4J" kind="presentation" identifier="signUpToHome" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="7TE-i4-yd1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qde-lT-AQg" sceneMemberID="firstResponder"/>
@@ -386,6 +388,7 @@
         <scene sceneID="qq3-ya-fqw">
             <objects>
                 <tabBarController id="uFn-57-d4J" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="f75-Iu-C03"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1O0-gs-w5Q">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -419,10 +422,13 @@
             <point key="canvasLocation" x="4225" y="1133"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7TE-i4-yd1"/>
+    </inferredMetricsTieBreakers>
     <resources>
-        <image name="fork.knife" catalog="system" width="94" height="128"/>
-        <image name="homekit" catalog="system" width="128" height="104"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
+        <image name="fork.knife" catalog="system" width="92" height="128"/>
+        <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

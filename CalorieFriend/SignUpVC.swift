@@ -33,6 +33,7 @@ class SignUpVC: UIViewController {
                 print("error")
             } else{
                 // Go to home page
+                self.performSegue(withIdentifier: "signUpToHome", sender: self)
             }
         }
     }
