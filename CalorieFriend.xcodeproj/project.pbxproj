@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		9303FA7F2985FC9600948145 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303FA7E2985FC9600948145 /* LoginVC.swift */; };
 		9303FA812985FD0F00948145 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303FA802985FD0F00948145 /* SignUpVC.swift */; };
-		9303FA852986052900948145 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9303FA842986052900948145 /* GoogleService-Info.plist */; };
 		9303FA882986060500948145 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA872986060500948145 /* FirebaseAuth */; };
 		9303FA8A2986060500948145 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA892986060500948145 /* FirebaseAuthCombine-Community */; };
 		9303FA8C2986060500948145 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8B2986060500948145 /* FirebaseDatabase */; };
 		9303FA8E2986060500948145 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8D2986060500948145 /* FirebaseDatabaseSwift */; };
 		9303FA912986103100948145 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA902986103100948145 /* FirebaseFirestore */; };
+		939FECF52989D6C400A535C9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 939FECF42989D6C400A535C9 /* HealthKit.framework */; };
+		939FECF72989D74F00A535C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 939FECF62989D74F00A535C9 /* GoogleService-Info.plist */; };
+		939FECF92989FC7D00A535C9 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939FECF82989FC7D00A535C9 /* HealthStore.swift */; };
 		93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */; };
 		93B77FAE2980C6B60023B6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B77FAD2980C6B60023B6E4 /* SceneDelegate.swift */; };
 		93B77FB32980C6B60023B6E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B77FB12980C6B60023B6E4 /* Main.storyboard */; };
@@ -25,7 +27,10 @@
 /* Begin PBXFileReference section */
 		9303FA7E2985FC9600948145 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9303FA802985FD0F00948145 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		9303FA842986052900948145 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		939FECF32989D6C300A535C9 /* CalorieFriend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieFriend.entitlements; sourceTree = "<group>"; };
+		939FECF42989D6C400A535C9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		939FECF62989D74F00A535C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		939FECF82989FC7D00A535C9 /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 		93B77FA82980C6B60023B6E4 /* CalorieFriend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieFriend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93B77FAD2980C6B60023B6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +48,7 @@
 				9303FA8E2986060500948145 /* FirebaseDatabaseSwift in Frameworks */,
 				9303FA8C2986060500948145 /* FirebaseDatabase in Frameworks */,
 				9303FA882986060500948145 /* FirebaseAuth in Frameworks */,
+				939FECF52989D6C400A535C9 /* HealthKit.framework in Frameworks */,
 				9303FA912986103100948145 /* FirebaseFirestore in Frameworks */,
 				9303FA8A2986060500948145 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
@@ -54,6 +60,7 @@
 		9303FA8F2986103100948145 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				939FECF42989D6C400A535C9 /* HealthKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -78,15 +85,17 @@
 		93B77FAA2980C6B60023B6E4 /* CalorieFriend */ = {
 			isa = PBXGroup;
 			children = (
+				939FECF32989D6C300A535C9 /* CalorieFriend.entitlements */,
 				93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */,
 				93B77FAD2980C6B60023B6E4 /* SceneDelegate.swift */,
 				9303FA7E2985FC9600948145 /* LoginVC.swift */,
 				9303FA802985FD0F00948145 /* SignUpVC.swift */,
+				939FECF82989FC7D00A535C9 /* HealthStore.swift */,
 				93B77FB12980C6B60023B6E4 /* Main.storyboard */,
 				93B77FB42980C6BA0023B6E4 /* Assets.xcassets */,
 				93B77FB62980C6BA0023B6E4 /* LaunchScreen.storyboard */,
 				93B77FB92980C6BA0023B6E4 /* Info.plist */,
-				9303FA842986052900948145 /* GoogleService-Info.plist */,
+				939FECF62989D74F00A535C9 /* GoogleService-Info.plist */,
 			);
 			path = CalorieFriend;
 			sourceTree = "<group>";
@@ -160,7 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93B77FB82980C6BA0023B6E4 /* LaunchScreen.storyboard in Resources */,
-				9303FA852986052900948145 /* GoogleService-Info.plist in Resources */,
+				939FECF72989D74F00A535C9 /* GoogleService-Info.plist in Resources */,
 				93B77FB52980C6BA0023B6E4 /* Assets.xcassets in Resources */,
 				93B77FB32980C6B60023B6E4 /* Main.storyboard in Resources */,
 			);
@@ -174,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9303FA812985FD0F00948145 /* SignUpVC.swift in Sources */,
+				939FECF92989FC7D00A535C9 /* HealthStore.swift in Sources */,
 				93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */,
 				93B77FAE2980C6B60023B6E4 /* SceneDelegate.swift in Sources */,
 				9303FA7F2985FC9600948145 /* LoginVC.swift in Sources */,
@@ -323,6 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CalorieFriend/CalorieFriend.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -350,6 +361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CalorieFriend/CalorieFriend.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

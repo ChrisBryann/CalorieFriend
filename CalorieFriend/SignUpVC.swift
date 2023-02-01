@@ -15,10 +15,12 @@ class SignUpVC: UIViewController {
     @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var confirmPassword: UITextField!
+    private var healthStore: HealthStore?
     
     let database = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
+        healthStore = HealthStore()
 
         // Do any additional setup after loading the view.
         let docRef = database.document("CalorieFriend/users")
@@ -27,6 +29,14 @@ class SignUpVC: UIViewController {
                 return
             }
             print(data)
+        }
+    }
+    @IBAction func enableHealthKitClicked(_ sender: UIButton) {
+        if let healthStore = healthStore {
+            print("good")
+            healthStore.requestAuthorization(completion: { success in
+                print("authorized")
+            })
         }
     }
     
