@@ -12,9 +12,12 @@ class LoginVC: UIViewController {
 
     @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
+    @IBOutlet var invalidCredentials: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        invalidCredentials.isHidden = true
     }
     
     @IBAction func loginClicked(_ sender: UIButton) {
@@ -22,8 +25,10 @@ class LoginVC: UIViewController {
         guard let userPassword = password.text else { return }
         
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { firebaseResult, err in
-            if let e = err {
-                print("error")
+            if let _ = err {
+                self.invalidCredentials.isHidden = false
+                self.email.text = ""
+                self.password.text = ""
             } else {
                 self.performSegue(withIdentifier: "loginToHome", sender: self)
             }
