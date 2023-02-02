@@ -71,6 +71,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6g7-9x-6S9"/>
                                         </constraints>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
@@ -114,7 +115,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tk6-2c-dSK"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Tk6-2c-dSK" firstAttribute="trailing" secondItem="wdo-RV-C0p" secondAttribute="trailing" constant="40" id="3PE-d9-v7h"/>
                             <constraint firstItem="wdo-RV-C0p" firstAttribute="leading" secondItem="Tk6-2c-dSK" secondAttribute="leading" constant="40" id="6mK-ux-11C"/>
@@ -517,7 +518,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7TE-i4-yd1"/>
+        <segue reference="dY0-nk-0BO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="fork.knife" catalog="system" width="92" height="128"/>

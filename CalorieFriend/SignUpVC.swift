@@ -51,7 +51,7 @@ class SignUpVC: UIViewController {
         // if everything is valid, then we create account and save account information in firestore
         
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { firebaseResult, err in
-            if let e = err { //if an error exists
+            if let _ = err { //if an error exists
                 print("error")
             } else{
                 // create a new user instance in firestore database
@@ -66,6 +66,14 @@ class SignUpVC: UIViewController {
         }
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "signUpToHome" {
+//            if let destVC = segue.destination as HomeVC {
+//                // set a property in HomeVC to hold the passed data
+//            }
+//        }
+//    }
+
     /*
     // MARK: - Navigation
 
