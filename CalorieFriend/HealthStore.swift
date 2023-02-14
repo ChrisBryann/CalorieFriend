@@ -32,4 +32,24 @@ class HealthStore {
         }
         
     }
+    func getCaloriesBurned(startDate: Date, endDate: Date, asc: Bool, completion: @escaping (Bool) -> Void) -> Void{
+        let sampleType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!
+        let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: asc)
+        let today = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+        
+        let query = HKSampleQuery(sampleType: sampleType, predicate: today, limit: Int(HKObjectQueryNoLimit), sortDescriptors: [sortByDate]){ query, results, error in
+            if let _ = error {
+                completion(false)
+                return
+            }
+            guard let samples = results as? [HKQuantitySample] else {
+                completion(false)
+                return
+            }
+            for sample in samples{
+                print(sample)
+            }
+        }
+        healthStore!.execute(query)
+    }
 }
