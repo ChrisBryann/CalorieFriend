@@ -39,6 +39,7 @@ class ProfileVC: UIViewController {
         defaults.set(height.text!, forKey: Keys.userHeight)
         defaults.set(weight.text!, forKey: Keys.userWeight)
         defaults.set(age.text!, forKey: Keys.userAge)
+        defaults.set(String(calculateTDEE()), forKey: "userGoal")
     }
     
     // Check if there are any saved values, if so update

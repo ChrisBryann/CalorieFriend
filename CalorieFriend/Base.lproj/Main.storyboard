@@ -490,7 +490,7 @@
         <!--Home-->
         <scene sceneID="DlT-1i-ST5">
             <objects>
-                <viewController id="dfw-YF-sGj" customClass="HomeVC" customModule="CalorieFriend" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dfw-YF-sGj" customClass="HomeVC" customModule="CalorieFriend" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YzJ-hf-DzQ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -571,6 +571,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="LCQ-Me-Ck1"/>
+                    <connections>
+                        <outlet property="consumedCaloriesLabel" destination="RR4-tP-ErR" id="AlI-8p-ach"/>
+                        <outlet property="dailyPercentGoalLabel" destination="emL-3u-XGX" id="1eJ-wb-gjV"/>
+                        <outlet property="goalCaloriesLabel" destination="N0R-FJ-YH2" id="Zgi-po-Rez"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGu-gc-Ke8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
