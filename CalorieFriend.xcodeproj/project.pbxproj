@@ -25,6 +25,8 @@
 		93B77FB82980C6BA0023B6E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B77FB62980C6BA0023B6E4 /* LaunchScreen.storyboard */; };
 		93F9405C299C25C200F108E2 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9405A299C25C100F108E2 /* FoodModel.swift */; };
 		93F9405D299C25C200F108E2 /* FoodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9405B299C25C100F108E2 /* FoodVC.swift */; };
+		EDAFF318299D6FDB00FDE3B1 /* Graph1.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAFF317299D6FDB00FDE3B1 /* Graph1.swift */; };
+		EDAFF31A299D765F00FDE3B1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAFF319299D765F00FDE3B1 /* HomeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		93B77FB92980C6BA0023B6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93F9405A299C25C100F108E2 /* FoodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		93F9405B299C25C100F108E2 /* FoodVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodVC.swift; sourceTree = "<group>"; };
+		EDAFF317299D6FDB00FDE3B1 /* Graph1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph1.swift; sourceTree = "<group>"; };
+		EDAFF319299D765F00FDE3B1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +103,9 @@
 				93F9405A299C25C100F108E2 /* FoodModel.swift */,
 				93F9405B299C25C100F108E2 /* FoodVC.swift */,
 				939FECF82989FC7D00A535C9 /* HealthStore.swift */,
+				EDAFF317299D6FDB00FDE3B1 /* Graph1.swift */,
 				93B77FB12980C6B60023B6E4 /* Main.storyboard */,
+				EDAFF319299D765F00FDE3B1 /* HomeVC.swift */,
 				0F45F509298DAC870012CAC1 /* ProfileVC.swift */,
 				93B77FB42980C6BA0023B6E4 /* Assets.xcassets */,
 				93B77FB62980C6BA0023B6E4 /* LaunchScreen.storyboard */,
@@ -192,7 +198,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				93F9405D299C25C200F108E2 /* FoodVC.swift in Sources */,
+				EDAFF31A299D765F00FDE3B1 /* HomeVC.swift in Sources */,
 				0F45F50A298DAC870012CAC1 /* ProfileVC.swift in Sources */,
+				EDAFF318299D6FDB00FDE3B1 /* Graph1.swift in Sources */,
 				9303FA812985FD0F00948145 /* SignUpVC.swift in Sources */,
 				939FECF92989FC7D00A535C9 /* HealthStore.swift in Sources */,
 				93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */,
