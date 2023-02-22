@@ -27,6 +27,12 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         checkProfile()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkProfile()
+        
+    }
 
     
     @IBAction func saveButton(_ sender: UIButton) {
