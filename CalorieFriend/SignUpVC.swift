@@ -66,13 +66,14 @@ class SignUpVC: UIViewController {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "signUpToHome" {
-//            if let destVC = segue.destination as HomeVC {
-//                // set a property in HomeVC to hold the passed data
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "signUpToHome" {
+            if let destVC = segue.destination as HomeVC {
+                // set a property in HomeVC to hold the passed data
+                destVC.healthStore = healthStore
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

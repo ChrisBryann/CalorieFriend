@@ -14,13 +14,14 @@ class HomeVC: UIViewController {
     @IBOutlet weak var goalCaloriesLabel: UILabel!
     @IBOutlet weak var consumedCaloriesLabel: UILabel!
     @IBOutlet weak var dailyPercentGoalLabel: UILabel!
+    // add property to pass in HealthStore
+    var healthStore: HealthStore?
     
     @IBSegueAction func addSwiftUIView(_ coder: NSCoder) -> UIViewController? {
         return UIHostingController(coder: coder, rootView: Graph1())
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
     }
     // TODO TELL USERS TO ADD GOALS
     override func viewWillAppear(_ animated: Bool) {

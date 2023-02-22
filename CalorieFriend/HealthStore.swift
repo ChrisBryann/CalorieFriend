@@ -32,6 +32,9 @@ class HealthStore {
         }
         
     }
+    ///
+    /// gets user's calories burned amount and save it to user's defaults.
+    ///
     func getCaloriesBurned(startDate: Date, endDate: Date, asc: Bool, completion: @escaping (Bool) -> Void) -> Void{
         let sampleType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: asc)
