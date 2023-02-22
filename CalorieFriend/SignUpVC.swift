@@ -66,12 +66,12 @@ class SignUpVC: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "signUpToHome" {
-            guard let destVC = segue.destination as? HomeVC else { return }
-            destVC.healthStore = healthStore
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "signUpToHome" {
+//            guard let destVC = segue.destination as? HomeVC else { return }
+//            destVC.healthStore = healthStore
+//        }
+//    }
 
     /*
     // MARK: - Navigation

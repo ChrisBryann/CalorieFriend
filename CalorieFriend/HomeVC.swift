@@ -22,9 +22,11 @@ class HomeVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        healthStore = HealthStore()
     }
     // TODO TELL USERS TO ADD GOALS
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
         let goalCals = defaults.string(forKey: "userGoal") ?? "0"
         let consumedCals = "1000"
@@ -39,6 +41,20 @@ class HomeVC: UIViewController {
         }
         goalCaloriesLabel.text = goalCals
         consumedCaloriesLabel.text = consumedCals
+        // get calories burned - bryan
+        if let healthStore = healthStore {
+            healthStore.getCaloriesBurned(startDate: Calendar.current.date(byAdding: .month, value: -1, to: Date())!, endDate: Date(), asc: false, completion: { success in
+                if success == "ERROR" {
+                    print("cannot retrieve calories! please enable healthkit permission!")
+                }else if success == "SAMPLE_ERR" {
+                    print("sample error!")
+                }else if success == "NO_SAMPLE" {
+                    print("no data available!")
+                }else {
+                    print("got calories!")
+                }
+            })
+        }
     }
 }
 
