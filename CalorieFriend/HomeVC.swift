@@ -28,7 +28,7 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
-        let goalCals = defaults.string(forKey: "userGoal") ?? "0"
+        let goalCals = defaults.string(forKey: "userTDEE") ?? "0"
         let consumedCals = "1000"
         
         if (goalCals != "0"){
