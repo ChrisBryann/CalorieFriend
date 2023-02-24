@@ -13,6 +13,8 @@ class HealthStore {
     var healthStore: HKHealthStore?
     var dateFormatter: DateFormatter
     
+    let defaults = UserDefaults.standard
+    
     init(){
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
@@ -57,14 +59,18 @@ class HealthStore {
                 completion("NO_SAMPLE")
                 return
             }
+            var data = []
             for sample in samples{
                 let unit = HKUnit(from: "Cal")
                 let calories = sample.quantity.doubleValue(for: unit)
-                print("calories: \(calories)")
                 let date = self.dateFormatter.string(from:sample.startDate)
-                print("date: \(date)")
-                print("")
+                data.append([
+                    "calories": calories,
+                    "date": date,
+                ])
             }
+            print(data)
+            self.defaults.set(data, forKey: "CaloriesBurnedData")
         }
         healthStore!.execute(query)
         completion("")
