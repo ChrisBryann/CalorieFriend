@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileVC: UIViewController {
     @IBOutlet private var name: UITextField!
@@ -14,6 +15,7 @@ class ProfileVC: UIViewController {
     @IBOutlet private var age: UITextField!
     @IBOutlet private var sexSelectButton: UIButton!
     @IBOutlet private var goalSelectButton: UIButton!
+    private var healthStore: HealthStore?
     
     let defaults = UserDefaults.standard
 
@@ -28,6 +30,7 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        healthStore = HealthStore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +97,22 @@ class ProfileVC: UIViewController {
         
         sexSelectButton.showsMenuAsPrimaryAction = true
         sexSelectButton.changesSelectionAsPrimaryAction = true
+    }
+    @IBAction func enableHealthKit(_ sender: UIButton) {
+        if let healthStore = healthStore {
+            print("good")
+            healthStore.requestAuthorization(completion: { success in
+                print("authorized")
+            })
+        }
+    }
+    @IBAction func logoutClicked(_ sender: UIButton) {
+        do {
+            try Auth.auth().signOut()
+            self.performSegue(withIdentifier: "ProfileToLogin", sender: self)
+        } catch let logoutError as NSError {
+            print("Error logging out: \(logoutError)")
+        }
     }
     
     @IBAction func saveButton(_ sender: UIButton) {

@@ -221,7 +221,7 @@
                                             <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="i4V-P6-oNH" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="7Yi-ho-p2w"/>
+                                            <segue destination="i4V-P6-oNH" kind="presentation" identifier="SIgnUpToLogin" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="7Yi-ho-p2w"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -424,6 +424,17 @@
                                                     <constraint firstAttribute="height" constant="2" id="Cdr-eW-ccK"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="952-GH-7tC">
+                                                <rect key="frame" x="107" y="411" width="161" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Enable HealthKit">
+                                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="enableHealthKit:" destination="Gyu-cI-Vhm" eventType="touchUpInside" id="aeK-sw-aDN"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -484,8 +495,8 @@
                                             <constraint firstItem="0Gu-F1-1w6" firstAttribute="leading" secondItem="9Sr-bn-Kup" secondAttribute="leading" id="yQA-vc-vQl"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09w-qn-MgJ">
-                                        <rect key="frame" x="132" y="674" width="143" height="43"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09w-qn-MgJ">
+                                        <rect key="frame" x="117" y="674" width="158" height="43"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Save Profile">
                                             <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
@@ -494,6 +505,19 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="saveButton:" destination="Gyu-cI-Vhm" eventType="touchUpInside" id="jDx-f2-2nG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-t6-Qy0">
+                                        <rect key="frame" x="150" y="623" width="92" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Logout">
+                                            <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
+                                            <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="logoutClicked:" destination="Gyu-cI-Vhm" eventType="touchUpInside" id="Kus-3f-BLv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -534,6 +558,7 @@
                         <outlet property="name" destination="URV-X8-7VE" id="PjE-mB-bwu"/>
                         <outlet property="sexSelectButton" destination="zOF-j1-RXk" id="v2U-lG-ZIx"/>
                         <outlet property="weight" destination="Ez8-J1-uFX" id="HzY-BQ-q67"/>
+                        <segue destination="i4V-P6-oNH" kind="presentation" identifier="ProfileToLogin" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="h9o-ng-Qtg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mB2-fM-cPR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -620,7 +645,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-GH-kEe">
-                                <rect key="frame" x="74" y="513" width="240" height="204"/>
+                                <rect key="frame" x="73" y="513" width="239" height="203"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="ae5-Si-ry6" kind="embed" destinationCreationSelector="addSwiftUIView:" id="HvZ-pc-6Vy"/>
@@ -713,7 +738,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7TE-i4-yd1"/>
+        <segue reference="dY0-nk-0BO"/>
+        <segue reference="h9o-ng-Qtg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="fork.knife" catalog="system" width="94" height="128"/>
