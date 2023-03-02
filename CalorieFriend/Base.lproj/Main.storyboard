@@ -697,19 +697,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipeCell" id="UlV-nA-Bdm">
-                                <rect key="frame" x="0.0" y="50" width="390" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UlV-nA-Bdm" id="Jf9-M2-Lqq">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="Hxx-Xz-n8B"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="js6-V5-1e8" id="MFZ-wr-Fw3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoE-ic-f0O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -718,6 +711,7 @@
         <!--Food-->
         <scene sceneID="Nn5-WX-sqw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PzL-Xb-oen" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RRd-nr-qUj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Food" image="fork.knife" catalog="system" selectedImage="fork.knife" id="4lc-fi-jia" userLabel="Food">
                         <color key="badgeColor" red="0.68229454755783081" green="0.89234215021133423" blue="0.92571538686752319" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -732,7 +726,6 @@
                         <segue destination="Mwd-eb-DOu" kind="relationship" relationship="rootViewController" id="Eh0-Sh-A6Z"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PzL-Xb-oen" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4216.9230769230771" y="975.35545023696682"/>
         </scene>

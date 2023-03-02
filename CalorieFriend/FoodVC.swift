@@ -7,9 +7,10 @@
 
 import UIKit
 
-class FoodVC: UITableViewController {
+class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let reuseIdentifier = "RecipeCell"
+    @IBOutlet var tableView: UITableView!
+
     var data: Response? {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -34,26 +35,35 @@ class FoodVC: UITableViewController {
     
     func configureTableView() {
         tableView.backgroundColor = .lightGray
-        tableView.tableFooterView = UIView()
+        tableView.register(RecipeCell.nib(), forCellReuseIdentifier: RecipeCell.identifier)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
-}
-
-extension FoodVC {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (data?.to ?? 0) - (data?.from ?? 0)
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140.0
+    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RecipeCell.identifier,
+                                                 for: indexPath) as! RecipeCell
         
         guard let recipe = data?.hits?[indexPath.row].recipe else {
             return UITableViewCell()
         }
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        cell.textLabel?.text = "\(recipe.source!): \(recipe.label!) - \(round(recipe.calories!)) calories"
+        
+        cell.configure(with: recipe)
+        cell.delegate = self
         
         return cell
+    }
+}
+
+extension FoodVC: RecipeCellDelegate {
+    func didTapAddRecipeButton(with recipe: Recipe) {
+        print("\(recipe.source ?? "1")")
     }
 }

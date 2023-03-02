@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="140" id="KGk-i7-Jjw" customClass="RecipeCell" customModule="CalorieFriend" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="388" height="140"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxN-Kb-gfj">
+                        <rect key="frame" x="15" y="89" width="120" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="dmS-vv-MW4"/>
+                            <constraint firstAttribute="width" constant="120" id="jqz-x2-Zaw"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                        <connections>
+                            <action selector="didTapAddRecipeButton" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Du6-ez-wVi"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ze-kj-TGU">
+                        <rect key="frame" x="15" y="15" width="358" height="49"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R16-gd-5J3">
+                        <rect key="frame" x="254" y="89" width="119" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="119" id="IzR-dC-plg"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="119" id="UfK-cf-M4f"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                        <connections>
+                            <action selector="didTapRecipeLinkButton" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mXX-Rm-Txz"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cxN-Kb-gfj" firstAttribute="top" secondItem="9Ze-kj-TGU" secondAttribute="bottom" constant="15" id="4dC-sw-2b0"/>
+                    <constraint firstItem="9Ze-kj-TGU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="9qQ-Gx-DuR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="R16-gd-5J3" secondAttribute="bottom" constant="15" id="EK7-OL-B6L"/>
+                    <constraint firstAttribute="trailing" secondItem="9Ze-kj-TGU" secondAttribute="trailing" constant="15" id="EMJ-Us-Ule"/>
+                    <constraint firstItem="9Ze-kj-TGU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="UTY-MK-Zjh"/>
+                    <constraint firstAttribute="trailing" secondItem="9Ze-kj-TGU" secondAttribute="trailing" constant="15" id="ccS-3j-572"/>
+                    <constraint firstItem="cxN-Kb-gfj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="eob-49-kC7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="cxN-Kb-gfj" secondAttribute="bottom" constant="15" id="glJ-Kv-Dqw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="R16-gd-5J3" secondAttribute="trailing" constant="15" id="s6P-Ow-xI5"/>
+                    <constraint firstItem="9Ze-kj-TGU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="uUr-EO-vmg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addRecipeButton" destination="cxN-Kb-gfj" id="vaN-Ti-3ur"/>
+                <outlet property="label" destination="9Ze-kj-TGU" id="bsn-w7-tX1"/>
+                <outlet property="recipeLinkButon" destination="R16-gd-5J3" id="fYe-fq-C3a"/>
+            </connections>
+            <point key="canvasLocation" x="184.73282442748092" y="0.70422535211267612"/>
+        </tableViewCell>
+    </objects>
+</document>
