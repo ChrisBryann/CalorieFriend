@@ -64,6 +64,13 @@ class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 extension FoodVC: RecipeCellDelegate {
     func didTapAddRecipeButton(with recipe: Recipe) {
+        let defaults = UserDefaults.standard
+        let consumedCals = defaults.double(forKey: "currentCals")
         print("\(recipe.source ?? "1")")
+        print("\(recipe.calories ?? 0)")
+        let newCalories = (recipe.calories ?? 0) + consumedCals
+        print("\(newCalories)")
+        defaults.set(newCalories, forKey: "currentCals")
+        //defaults.set(0, forKey: "currentCals")
     }
 }
