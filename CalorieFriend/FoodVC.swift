@@ -7,10 +7,17 @@
 
 import UIKit
 
-class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FoodVC: UITableViewController {
+    //@IBOutlet var tableView: UITableView!
+    @IBOutlet weak var searchBar: UITextField!
     
-    @IBOutlet var tableView: UITableView!
-
+    @IBOutlet weak var searchButton: UIBarButtonItem!
+    
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
+        print("BUTTON CLICKEDF");
+        search();
+    }
+    
     var data: Response? {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -23,14 +30,6 @@ class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         configureTableView()
         
-        let recipeManager = RecipeManager()
-        
-        recipeManager.fetchRecipes() { result in
-            self.data = result
-            DispatchQueue.main.async { [self] in
-                navigationItem.title = "Menu"
-            }
-        }
     }
     
     func configureTableView() {
@@ -40,14 +39,14 @@ class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (data?.to ?? 0) - (data?.from ?? 0)
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140.0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipeCell.identifier,
                                                  for: indexPath) as! RecipeCell
         
@@ -59,6 +58,20 @@ class FoodVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.delegate = self
         
         return cell
+    }
+    func search(){
+        let recipeManager = RecipeManager()
+        let searchText = searchBar.text ?? nil
+        print(searchText ?? "EDIDI")
+        if ((searchText) != nil){
+            recipeManager.fetchRecipes(searchText: searchText!) { result in
+                self.data = result
+                DispatchQueue.main.async { [self] in
+                    navigationItem.title = "Menu"
+                }
+            }
+        }
+        self.tableView.reloadData()
     }
 }
 
