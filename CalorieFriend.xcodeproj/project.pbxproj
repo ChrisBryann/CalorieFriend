@@ -16,6 +16,7 @@
 		9303FA8C2986060500948145 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8B2986060500948145 /* FirebaseDatabase */; };
 		9303FA8E2986060500948145 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA8D2986060500948145 /* FirebaseDatabaseSwift */; };
 		9303FA912986103100948145 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9303FA902986103100948145 /* FirebaseFirestore */; };
+		9354F84129B7E75F002A445A /* FoodResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354F84029B7E75F002A445A /* FoodResultVC.swift */; };
 		939FECF52989D6C400A535C9 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 939FECF42989D6C400A535C9 /* HealthKit.framework */; };
 		939FECF92989FC7D00A535C9 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939FECF82989FC7D00A535C9 /* HealthStore.swift */; };
 		93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B77FAB2980C6B60023B6E4 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 		0FFD1D89298D9F7C00E3FDD3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9303FA7E2985FC9600948145 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9303FA802985FD0F00948145 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		9354F84029B7E75F002A445A /* FoodResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodResultVC.swift; sourceTree = "<group>"; };
 		939FECF32989D6C300A535C9 /* CalorieFriend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieFriend.entitlements; sourceTree = "<group>"; };
 		939FECF42989D6C400A535C9 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		939FECF82989FC7D00A535C9 /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				EDEF88E229B5512C00B8A3CA /* RecipeCell.swift */,
 				EDAFF317299D6FDB00FDE3B1 /* Graph1.swift */,
 				93B77FB12980C6B60023B6E4 /* Main.storyboard */,
+				9354F84029B7E75F002A445A /* FoodResultVC.swift */,
 				EDAFF319299D765F00FDE3B1 /* HomeVC.swift */,
 				0F45F509298DAC870012CAC1 /* ProfileVC.swift */,
 				EDEF88E429B5540600B8A3CA /* RecipeCell.xib */,
@@ -213,6 +216,7 @@
 				EDEF88E329B5512C00B8A3CA /* RecipeCell.swift in Sources */,
 				93B77FAC2980C6B60023B6E4 /* AppDelegate.swift in Sources */,
 				93B77FAE2980C6B60023B6E4 /* SceneDelegate.swift in Sources */,
+				9354F84129B7E75F002A445A /* FoodResultVC.swift in Sources */,
 				9303FA7F2985FC9600948145 /* LoginVC.swift in Sources */,
 				93F9405C299C25C200F108E2 /* FoodModel.swift in Sources */,
 			);
