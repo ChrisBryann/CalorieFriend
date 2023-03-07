@@ -8,9 +8,7 @@
 import UIKit
 
 class FoodVC: UITableViewController {
-    //@IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBar: UITextField!
-    
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
     @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
@@ -37,6 +35,7 @@ class FoodVC: UITableViewController {
         tableView.register(RecipeCell.nib(), forCellReuseIdentifier: RecipeCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
+        navigationItem.title = "Recipes"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,19 +58,37 @@ class FoodVC: UITableViewController {
         
         return cell
     }
-    func search(){
+    
+    func getCalories() -> String {
+        let defaults = UserDefaults.standard
+        let goal = defaults.value(forKey: "userGoal")
+        
+        switch goal as? String {
+        case "Gain Weight (+500 kCals)":
+            return "&calories=500-700"
+        case "Maintain Current Weight (+0 kCals)":
+            return "&calories=300-500"
+        case "Lose Weight (-500 kCals)":
+            return "&calories=100-300"
+        default:
+            return ""
+        }
+    }
+    
+    func search() {
         let recipeManager = RecipeManager()
         let searchText = searchBar.text ?? nil
+        let calories = getCalories()
         print(searchText ?? "EDIDI")
-        if ((searchText) != nil){
-            recipeManager.fetchRecipes(searchText: searchText!) { result in
+        
+        if (searchText != nil){
+            recipeManager.fetchRecipes(searchText: searchText!, calories: calories) { result in
                 self.data = result
                 DispatchQueue.main.async { [self] in
-                    navigationItem.title = "Menu"
+                    tableView.reloadData()
                 }
             }
         }
-        self.tableView.reloadData()
     }
 }
 
@@ -84,6 +101,14 @@ extension FoodVC: RecipeCellDelegate {
         let newCalories = (recipe.calories ?? 0) + consumedCals
         print("\(newCalories)")
         defaults.set(newCalories, forKey: "currentCals")
-        //defaults.set(0, forKey: "currentCals")
+    }
+    
+    func didTapRecipeLinkButton(with recipe: Recipe) {
+        print("tapped recipe link")
+        guard let url = URL(string: recipe.url!) else { return }
+        UIApplication.shared.open(url)
+        
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "currentCals") // temp way to set current calories back to 0, remove later
     }
 }

@@ -645,7 +645,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-GH-kEe">
-                                <rect key="frame" x="72" y="512" width="240" height="203"/>
+                                <rect key="frame" x="72" y="512" width="239" height="203"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="ae5-Si-ry6" kind="embed" destinationCreationSelector="addSwiftUIView:" id="HvZ-pc-6Vy"/>
@@ -714,18 +714,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="3MK-N1-D6J">
                         <nil key="title"/>
-                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Meal..." textAlignment="natural" minimumFontSize="17" id="mXW-Fd-fB9">
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Meal..." textAlignment="natural" minimumFontSize="17" id="mXW-Fd-fB9">
                             <rect key="frame" x="16" y="5" width="266" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="jug-hu-iAK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ep2-x1-k9k">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ep2-x1-k9k">
                                 <rect key="frame" x="288" y="5" width="86" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Search"/>
                                 <connections>
                                     <action selector="searchButtonClicked:" destination="xIO-rC-EZU" eventType="touchUpInside" id="WD6-vk-qmf"/>
                                 </connections>

@@ -9,10 +9,10 @@ import UIKit
 
 struct RecipeManager {
     
-    func fetchRecipes(searchText:String, completion: @escaping (Response) -> Void) {
+    func fetchRecipes(searchText: String, calories: String, completion: @escaping (Response) -> Void) {
         let app_id = "924797ad"
         let app_key = "1c303b7a13757ae604f986bd6cb5ddba"
-        let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=\(searchText)&app_id=\(app_id)&app_key=\(app_key)&calories=500")
+        let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=\(searchText)&app_id=\(app_id)&app_key=\(app_key)\(calories)")
         let dataTask = URLSession.shared.dataTask(with: url!) { data, response, error in
             if let error = error {
                 print("Error fetching API: \(error)")

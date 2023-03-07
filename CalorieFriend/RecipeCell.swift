@@ -9,6 +9,7 @@ import UIKit
 
 protocol RecipeCellDelegate: AnyObject {
     func didTapAddRecipeButton(with recipe: Recipe)
+    func didTapRecipeLinkButton(with recipe: Recipe)
 }
 
 class RecipeCell: UITableViewCell {
@@ -31,7 +32,7 @@ class RecipeCell: UITableViewCell {
     }
     
     @IBAction func didTapRecipeLinkButton() {
-        
+        delegate?.didTapRecipeLinkButton(with: self.recipe!)
     }
     
     func configure(with recipe: Recipe) {
