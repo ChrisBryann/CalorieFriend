@@ -101,6 +101,27 @@ extension FoodVC: RecipeCellDelegate {
         let newCalories = (recipe.calories ?? 0) + consumedCals
         print("\(newCalories)")
         defaults.set(newCalories, forKey: "currentCals")
+        
+        let data = [
+            "Label": recipe.label!,
+            "Cals": recipe.calories!,
+            "URL": recipe.url!
+        ] as [String : Any]
+        var addedRecipe : [[String: Any]] = []
+        var totalRecipe : [[String: Any]] = []
+        if let addedData = defaults.array(forKey: "addedRecipe") as? [[String: Any]] {
+            addedRecipe = addedData
+        }
+        
+        if let totalData = defaults.array(forKey: "totalRecipe") as? [[String: Any]] {
+            totalRecipe = totalData
+        }
+        
+        addedRecipe.append(data)
+        totalRecipe.append(data)
+        
+        defaults.set(addedRecipe, forKey: "addedRecipe")
+        defaults.set(totalRecipe, forKey: "totalRecipe")
     }
     
     func didTapRecipeLinkButton(with recipe: Recipe) {
