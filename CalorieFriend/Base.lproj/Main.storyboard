@@ -714,15 +714,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zDL-C3-LfX">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDL-C3-LfX">
                                 <rect key="frame" x="0.0" y="143" width="390" height="618"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Gq9-6J-7iE">
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Gq9-6J-7iE">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="618"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Gq9-6J-7iE" firstAttribute="top" secondItem="zDL-C3-LfX" secondAttribute="top" id="0mV-zS-frF"/>
+                                    <constraint firstAttribute="height" constant="618" id="PfX-JG-qja"/>
                                     <constraint firstItem="Gq9-6J-7iE" firstAttribute="leading" secondItem="zDL-C3-LfX" secondAttribute="leading" id="XDI-x2-flL"/>
                                     <constraint firstAttribute="bottom" secondItem="Gq9-6J-7iE" secondAttribute="bottom" id="fbL-Bd-ABg"/>
                                     <constraint firstAttribute="trailing" secondItem="Gq9-6J-7iE" secondAttribute="trailing" id="gBq-xL-bMh"/>

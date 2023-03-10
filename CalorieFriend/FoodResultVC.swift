@@ -13,10 +13,12 @@ class FoodResultVC: UIViewController {
     @IBOutlet var foodStackView: UIStackView!
     
     private var defaults = UserDefaults.standard
+    private var foodLabels: [FoodResultLabel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Foods"
+        foodLabels = []
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 20)!]
     }
     // everytime this page appears, refresh the food result to show the added foods
@@ -25,9 +27,11 @@ class FoodResultVC: UIViewController {
         print("appear")
         if let addedRecipe = defaults.array(forKey: "addedRecipe") as? [[String:Any]] {
             for recipe in addedRecipe {
-                let label = UILabel()
-                label.text = "Food: \(recipe["Label"] as? String ?? ""), Cals: \(recipe["Cals"] as? Double ?? 0)"
-                foodStackView.addArrangedSubview(label) // this infinitely adds new label everytime we load. NEED TO FIX: everytime it loads, delete all subviews and add again the updated data.
+//                let label = UILabel()
+//                label.text = "Food: \(recipe["Label"] as? String ?? ""), Cals: \(recipe["Cals"] as? Double ?? 0)"
+                let foodLabel = FoodResultLabel(data: recipe)
+                foodLabels.append(foodLabel)
+                foodStackView.addArrangedSubview(foodLabel)
             }
             // once finish adding the labels, reset the addedRecipe userDefaults
             self.defaults.set(nil, forKey: "addedRecipe")
