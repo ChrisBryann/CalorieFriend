@@ -12,7 +12,7 @@ class FoodVC: UITableViewController {
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
     @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
-        print("BUTTON CLICKEDF");
+        print("BUTTON CLICKED");
         search();
     }
     
@@ -98,13 +98,15 @@ extension FoodVC: RecipeCellDelegate {
         let consumedCals = defaults.double(forKey: "currentCals")
         print("\(recipe.source ?? "1")")
         print("\(recipe.calories ?? 0)")
-        let newCalories = (recipe.calories ?? 0) + consumedCals
-        print("\(newCalories)")
-        defaults.set(newCalories, forKey: "currentCals")
+        let recipeCalories : Double = recipe.calories ?? 0
+        let recipeYield : Double = recipe.yield ?? 0
+        let newCalories = Int((recipeCalories / recipeYield) + consumedCals)
+        print("\(Int(newCalories))")
+        defaults.set(Int(newCalories), forKey: "currentCals")
         
         let data = [
             "Label": recipe.label!,
-            "Cals": recipe.calories!,
+            "Cals": Int(recipeCalories / recipeYield),
             "URL": recipe.url!
         ] as [String : Any]
         var addedRecipe : [[String: Any]] = []

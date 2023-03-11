@@ -40,7 +40,7 @@ class RecipeCell: UITableViewCell {
         
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.text = "\(recipe.source!): \(recipe.label!) - \(round(recipe.calories!)) calories"
+        label.text = "\(recipe.source!): \(recipe.label!) - \(Int(recipe.calories! / recipe.yield!)) Calories Per Serving"
         addRecipeButton.setTitle("Add Recipe", for: .normal)
         recipeLinkButon.setTitle("Recipe Link", for: .normal)
     }

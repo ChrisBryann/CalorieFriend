@@ -20,7 +20,7 @@ class FoodResultVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        title = "Foods"
+        title = "Food List"
         recipes = fetchData()
         self.navigationController?.navigationBar.largeTitleTextAttributes = [
             .font: UIFont(name: "Futura", size: 36)!
