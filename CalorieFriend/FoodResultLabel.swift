@@ -7,49 +7,40 @@
 
 import UIKit
 
-class FoodResultLabel: UIView {
+class FoodResultLabel: UITableViewCell {
     
-    let label = UILabel()
-    let deleteButton = UIButton()
+    var foodLabel = UILabel()
     
-    var data: [String: Any] = [:]
+    var data: [String:Any] = [:]
     
-    init(data: [String: Any]) {
-        super.init(frame: CGRectZero)
-        configureSubviews()
-        setup(data: data)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        configureSubviews()
-    }
-    
-    private func configureSubviews() {
-        // creating the label
-        addSubview(label)
-        label.font = UIFont(name: "Futura", size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(foodLabel)
         
-        // creating the delete button
-        addSubview(deleteButton)
-        deleteButton.isEnabled = true
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30).isActive = true
-        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
-        deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
-    }
-
-    private func setup(data: [String: Any]) {
-        self.data = data
-        label.text = "\(self.data["Label"] as? String ?? "") (\(self.data["Cals"] as? Double ?? 0))"
+        configureFoodLabel()
+        setFoodLabelConstraints()
     }
     
-    @objc private func deleteButtonClicked() {
-        print("delete button clicked!")
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func set(recipe: [String:Any]) {
+        foodLabel.text = "\(recipe["Label"] ?? "") (\(recipe["Cals"] ?? 0))"
+        self.data = recipe
+    }
+    
+    func configureFoodLabel() {
+        foodLabel.numberOfLines = 0 // to word wrap
+        foodLabel.adjustsFontSizeToFitWidth = true // shrink the fontsize if it's to big for the width
+        foodLabel.font = UIFont(name: "Futura", size: 15)
+    }
+    
+    func setFoodLabelConstraints() {
+        foodLabel.translatesAutoresizingMaskIntoConstraints = false
+        foodLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        foodLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        foodLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        foodLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
     }
 }

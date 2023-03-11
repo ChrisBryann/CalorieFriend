@@ -35,7 +35,7 @@ class FoodVC: UITableViewController {
         tableView.register(RecipeCell.nib(), forCellReuseIdentifier: RecipeCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.title = "Recipes"
+//        navigationItem.title = "Recipes"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
