@@ -32,6 +32,7 @@ struct ProfileView: View {
     @State var goal = ""
     @State private var birthdate = Date()
 
+    // Build Form for profile entry
     var body: some View {
         NavigationView {
             Form {
@@ -86,6 +87,7 @@ struct ProfileView: View {
                 }
                 
                 Section() {
+                    // button save profile stores userdefaults
                     Button("Save Profile") {
                         defaults.set(fullName, forKey: Keys.userName)
                         defaults.set(weight, forKey: Keys.userWeight)
@@ -113,6 +115,7 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("Profile")
+            // when loaded restore from user defaults
             .onAppear {
                 healthStore = HealthStore()
                 fullName = defaults.value(forKey: Keys.userName) as? String ?? ""
@@ -127,6 +130,7 @@ struct ProfileView: View {
     }
 }
 
+// Modify TextFields to show title when text is displayed
 struct TextInputField: View {
     var title: String
     @Binding var text: String
@@ -153,8 +157,8 @@ func calculateTDEE() -> Int {
     let savedAge = defaults.value(forKey: Keys.userAge) as? String ?? ""
     let savedHeight = defaults.value(forKey: Keys.userHeight) as? String ?? ""
     let savedWeight = defaults.value(forKey: Keys.userWeight) as? String ?? ""
-    let savedSex = defaults.value(forKey: Keys.userSex) as? String ?? "Select"
-    let savedGoal = defaults.value(forKey: Keys.userGoal) as? String ?? "Select"
+    let savedSex = defaults.value(forKey: Keys.userSex) as? String ?? ""
+    let savedGoal = defaults.value(forKey: Keys.userGoal) as? String ?? ""
     
     if (savedAge != "" && savedHeight != "" && savedWeight != "") {
         let intWeight = Int(savedWeight) ?? 0
