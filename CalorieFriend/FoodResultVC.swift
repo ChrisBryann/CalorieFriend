@@ -25,11 +25,15 @@ class FoodResultVC: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [
             .font: UIFont(name: "Futura", size: 36)!
         ]
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "Futura", size: 18)!
+        ]
     }
     // everytime this page appears, refresh the food result to show the added foods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recipes = fetchData()
+        print(recipes)
         tableView.reloadData()
         
     }
@@ -76,9 +80,10 @@ extension FoodResultVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let recipe = recipes.remove(at: indexPath.row)
+            let recipe = recipes[indexPath.row]
             removeData(recipe: recipe)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            // now handle the one in recipe array
+            recipes = fetchData()
             tableView.reloadData()
         }
     }
@@ -94,11 +99,18 @@ extension FoodResultVC {
     }
     
     func removeData(recipe: [String: Any]) -> Void {
-        if let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
-            let newTotalRecipe = totalRecipe.filter { data in
-                data["Label"] as! String != recipe["Label"] as! String
+        if var totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
+            let idx = totalRecipe.firstIndex(where: {$0["Label"] as! String == recipe["Label"] as! String})!
+            var dict = totalRecipe[idx]
+            if dict["Count"] as! Int == 1 {
+                totalRecipe = totalRecipe.filter { data in
+                    data["Label"] as! String != recipe["Label"] as! String
+                }
+            }else{
+                dict.updateValue(dict["Count"] as! Int - 1, forKey: "Count")
+                totalRecipe[idx] = dict
             }
-            self.defaults.set(newTotalRecipe, forKey: "totalRecipe")
+            self.defaults.set(totalRecipe, forKey: "totalRecipe")
         }
     }
 }

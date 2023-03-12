@@ -108,21 +108,24 @@ extension FoodVC: RecipeCellDelegate {
             "Label": recipe.label!,
             "Cals": Int(recipeCalories / recipeYield),
             "URL": recipe.url!
+            "Count": 1,
         ] as [String : Any]
-        var addedRecipe : [[String: Any]] = []
-        var totalRecipe : [[String: Any]] = []
-        if let addedData = defaults.array(forKey: "addedRecipe") as? [[String: Any]] {
-            addedRecipe = addedData
-        }
         
+        var totalRecipe : [[String: Any]] = []
         if let totalData = defaults.array(forKey: "totalRecipe") as? [[String: Any]] {
             totalRecipe = totalData
         }
         
-        addedRecipe.append(data)
-        totalRecipe.append(data)
-        
-        defaults.set(addedRecipe, forKey: "addedRecipe")
+        if let idx = totalRecipe.firstIndex(where: {$0["Label"] as! String == data["Label"] as! String}) {
+            print("found!")
+            var dict = totalRecipe[idx] as [String: Any]
+            dict.updateValue(dict["Count"] as! Int + 1, forKey: "Count")
+            totalRecipe[idx] = dict
+             // if it already exists, update the count!
+        }else {
+            totalRecipe.append(data)
+        }
+    
         defaults.set(totalRecipe, forKey: "totalRecipe")
     }
     
