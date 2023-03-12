@@ -107,7 +107,7 @@ extension FoodVC: RecipeCellDelegate {
         let data = [
             "Label": recipe.label!,
             "Cals": Int(recipeCalories / recipeYield),
-            "URL": recipe.url!
+            "URL": recipe.url!,
             "Count": 1,
         ] as [String : Any]
         
