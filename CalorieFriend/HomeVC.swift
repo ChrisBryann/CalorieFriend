@@ -8,8 +8,11 @@
 import UIKit
 import Foundation
 import SwiftUI
+import Firebase
 
 class HomeVC: UIViewController {
+    
+    private let database = Database.database().reference()
     
     @IBOutlet weak var goalCaloriesLabel: UILabel!
     @IBOutlet weak var consumedCaloriesLabel: UILabel!
@@ -77,6 +80,20 @@ class HomeVC: UIViewController {
         goalCaloriesLabel.text = goalCals
         let burnedCals: Int = defaults.value(forKey: "CaloriesBurnedDate") as? Int ?? 0
         consumedCaloriesLabel.text = String(currentCals - burnedCals)
+        
+        addToDatabse(goalCalories: goalCals, consumedCalories: String(currentCals - burnedCals))
+    }
+    
+    private func addToDatabse(goalCalories: String, consumedCalories: String) -> Void {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        let todayStr = df.string(from: Date())
+        
+        let entry: [String: Any] = [
+            "Goal": goalCalories as NSObject,
+            "Calories": consumedCalories
+        ]
+        database.child(todayStr).setValue(entry)
     }
 }
 
