@@ -7,6 +7,9 @@
 
 import UIKit
 
+public var dateItemsAdded: Date = Date()
+public var firstItemAdded: Bool = false
+
 class FoodVC: UITableViewController {
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var searchButton: UIBarButtonItem!
@@ -94,15 +97,17 @@ class FoodVC: UITableViewController {
 
 extension FoodVC: RecipeCellDelegate {
     func didTapAddRecipeButton(with recipe: Recipe) {
+        
+        if (!firstItemAdded) {
+            firstItemAdded = true
+            dateItemsAdded = Date()
+        }
+        
         let defaults = UserDefaults.standard
-        //let consumedCals = defaults.double(forKey: "currentCals")
         print("\(recipe.source ?? "1")")
         print("\(recipe.calories ?? 0)")
         let recipeCalories : Double = recipe.calories ?? 0
         let recipeYield : Double = recipe.yield ?? 0
-        //let newCalories = Int((recipeCalories / recipeYield) + consumedCals)
-        //print("\(Int(newCalories))")
-        //defaults.set(Int(newCalories), forKey: "currentCals")
         
         let data = [
             "Label": recipe.label!,

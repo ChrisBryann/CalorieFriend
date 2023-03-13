@@ -47,6 +47,11 @@ class HomeVC: UIViewController {
             })
         }
         
+        if (firstItemAdded && Calendar.current.isDateInYesterday(dateItemsAdded)) {
+            defaults.removeObject(forKey: "totalRecipe")
+            firstItemAdded = false
+        }
+        
         if (goalCals != "0"){
             // get total calories from current food list
             let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String: Any]]
