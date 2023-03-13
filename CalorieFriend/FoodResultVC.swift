@@ -43,7 +43,7 @@ class FoodResultVC: UIViewController {
         // set delegates
         setTableViewDelegates()
         // set row height
-        tableView.rowHeight = 60
+        tableView.rowHeight = 100
         // register cells
         tableView.register(FoodResultLabel.self, forCellReuseIdentifier: "FoodResultLabel")
         // set constraints
@@ -64,41 +64,8 @@ class FoodResultVC: UIViewController {
         tableView.dataSource = self
     }
     
-}
-
-extension FoodResultVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // how many cells?
-        return recipes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodResultLabel") as! FoodResultLabel
-        let recipe = recipes[indexPath.row]
-        cell.set(recipe: recipe)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let recipe = recipes[indexPath.row]
-            removeData(recipe: recipe)
-            // now handle the one in recipe array
-            recipes = fetchData()
-            tableView.reloadData()
-        }
-    }
-}
-
-extension FoodResultVC {
-    func fetchData() -> [[String: Any]] {
-        if let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
-            return totalRecipe
-        }else{
-            return []
-        }
-    }
-    
-    func removeData(recipe: [String: Any]) -> Void {
+    @objc private func foodDecrementClicked(sender: UIButton) {
+        let recipe = recipes[sender.tag]
         if var totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
             let idx = totalRecipe.firstIndex(where: {$0["Label"] as! String == recipe["Label"] as! String})!
             var dict = totalRecipe[idx]
@@ -111,6 +78,76 @@ extension FoodResultVC {
                 totalRecipe[idx] = dict
             }
             self.defaults.set(totalRecipe, forKey: "totalRecipe")
+            recipes = totalRecipe
+        }
+        tableView.reloadData()
+    }
+    
+    @objc private func foodIncrementClicked(sender: UIButton) {
+        let recipe = recipes[sender.tag]
+        if var totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
+            let idx = totalRecipe.firstIndex(where: {$0["Label"] as! String == recipe["Label"] as! String})!
+            var dict = totalRecipe[idx]
+            dict.updateValue(dict["Count"] as! Int + 1, forKey: "Count")
+            totalRecipe[idx] = dict
+            
+            self.defaults.set(totalRecipe, forKey: "totalRecipe")
+            recipes = totalRecipe
+        }
+        tableView.reloadData()
+    }
+    
+}
+
+extension FoodResultVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // how many cells?
+        return recipes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodResultLabel") as! FoodResultLabel
+        let recipe = recipes[indexPath.row]
+        cell.set(recipe: recipe)
+        cell.foodDecrement.addTarget(self, action: #selector(foodDecrementClicked(sender:)), for: .touchUpInside)
+        cell.foodDecrement.tag = indexPath.row
+        cell.foodIncrement.addTarget(self, action: #selector(foodIncrementClicked(sender:)), for: .touchUpInside)
+        cell.foodIncrement.tag = indexPath.row
+        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let recipe = recipes[indexPath.row]
+//            removeData(recipe: recipe)
+//            // now handle the one in recipe array
+//            recipes = fetchData()
+//            tableView.reloadData()
+//        }
+//    }
+}
+
+extension FoodResultVC {
+    func fetchData() -> [[String: Any]] {
+        if let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
+            return totalRecipe
+        }else{
+            return []
         }
     }
+    
+//    func removeData(recipe: [String: Any]) -> Void {
+//        if var totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String:Any]] {
+//            let idx = totalRecipe.firstIndex(where: {$0["Label"] as! String == recipe["Label"] as! String})!
+//            var dict = totalRecipe[idx]
+//            if dict["Count"] as! Int == 1 {
+//                totalRecipe = totalRecipe.filter { data in
+//                    data["Label"] as! String != recipe["Label"] as! String
+//                }
+//            }else{
+//                dict.updateValue(dict["Count"] as! Int - 1, forKey: "Count")
+//                totalRecipe[idx] = dict
+//            }
+//            self.defaults.set(totalRecipe, forKey: "totalRecipe")
+//        }
+//    }
 }

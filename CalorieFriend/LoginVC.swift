@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SwiftUI
 
 class LoginVC: UIViewController {
 
@@ -47,3 +48,18 @@ class LoginVC: UIViewController {
     */
 
 }
+
+//struct LoginVCWrapper: UIViewControllerRepresentable {
+//    typealias UIViewControllerType = LoginVC
+//    
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<LoginVCWrapper>) -> LoginVCWrapper.UIViewControllerType {
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let loginViewController: LoginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+//        
+//        return loginViewController
+//    }
+//    
+//    func updateUIViewController(_ uiViewController: LoginVCWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<LoginVCWrapper>) {
+//        //
+//    }
+//}

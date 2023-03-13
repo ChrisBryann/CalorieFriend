@@ -11,17 +11,27 @@ class FoodResultLabel: UITableViewCell {
     
     var foodLabel = UILabel()
     var foodCountLabel = UILabel()
+    var foodDecrement = UIButton()
+    var foodIncrement = UIButton()
+
     
     var data: [String:Any] = [:]
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(foodLabel)
+        contentView.addSubview(foodDecrement)
+        contentView.addSubview(foodIncrement)
         addSubview(foodCountLabel)
         
         configureFoodCountLabel()
         configureFoodLabel()
+        configureFoodDecrement()
+        configureFoodIncrement()
+        
         setFoodCountLabelConstraints()
+        setFoodIncrementConstraints()
+        setFoodDecrementConstraints()
         setFoodLabelConstraints()
     }
     
@@ -43,8 +53,17 @@ class FoodResultLabel: UITableViewCell {
     
     func configureFoodLabel() {
         foodLabel.numberOfLines = 0 // to word wrap
+        foodLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         foodLabel.adjustsFontSizeToFitWidth = true // shrink the fontsize if it's to big for the width
         foodLabel.font = UIFont(name: "Futura", size: 15)
+    }
+    
+    func configureFoodDecrement() {
+        foodDecrement.setImage(UIImage(systemName: "minus"), for: .normal)
+    }
+    
+    func configureFoodIncrement() {
+        foodIncrement.setImage(UIImage(systemName: "plus"), for: .normal)
     }
 
     func setFoodCountLabelConstraints() {
@@ -58,7 +77,21 @@ class FoodResultLabel: UITableViewCell {
         foodLabel.translatesAutoresizingMaskIntoConstraints = false
         foodLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         foodLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        foodLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 2/3).isActive = true
         foodLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        foodLabel.trailingAnchor.constraint(equalTo: foodCountLabel.leadingAnchor, constant: -10).isActive = true
+    }
+    
+    func setFoodIncrementConstraints() {
+        foodIncrement.translatesAutoresizingMaskIntoConstraints = false
+        foodIncrement.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        foodIncrement.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        foodIncrement.trailingAnchor.constraint(equalTo: foodCountLabel.leadingAnchor, constant: -10).isActive = true
+    }
+    
+    func setFoodDecrementConstraints() {
+        foodDecrement.translatesAutoresizingMaskIntoConstraints = false
+        foodDecrement.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        foodDecrement.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        foodDecrement.trailingAnchor.constraint(equalTo: foodIncrement.leadingAnchor, constant: -5).isActive = true
     }
 }
