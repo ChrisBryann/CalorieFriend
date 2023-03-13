@@ -29,16 +29,9 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
         let goalCals = defaults.string(forKey: "userTDEE") ?? "0"
-        let consumedCals = defaults.double(forKey: "currentCals")
+        var currentCals = 0
+        //let consumedCals = defaults.double(forKey: "currentCals")
         
-        if (goalCals != "0"){
-            let consumedCaloriesInt = Int(consumedCals)
-            let goalCaloriesInt = Int(goalCals) ?? 1
-            let score = ((Double(consumedCaloriesInt)/Double(goalCaloriesInt)) * 100)
-            dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
-        }else{
-            dailyPercentGoalLabel.text = "0%"
-        }
         // get calories burned - bryan
         if let healthStore = healthStore {
             healthStore.getCaloriesBurned(startDate: Calendar.current.date(byAdding: .month, value: -1, to: Date())!, endDate: Date(), asc: false, completion: { success in
@@ -53,9 +46,32 @@ class HomeVC: UIViewController {
                 }
             })
         }
+        
+        if (goalCals != "0"){
+            // get total calories from current food list
+            let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String: Any]]
+            let dictEmpty: Bool = totalRecipe == nil
+            if (!dictEmpty) {
+                for data in totalRecipe! {
+                    let cals: Int = data["Cals"] as? Int ?? 0
+                    let count: Int = data["Count"] as? Int ?? 0
+                    currentCals += (cals * count)
+                }
+            }
+            
+            defaults.set(currentCals, forKey: "currentCals")
+            let consumedCaloriesInt = Int(currentCals)
+            let goalCaloriesInt = Int(goalCals) ?? 1
+            let score = ((Double(consumedCaloriesInt)/Double(goalCaloriesInt)) * 100)
+            dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
+        }else{
+            dailyPercentGoalLabel.text = "0%"
+        }
+
         // TODO subtract calories burned
         goalCaloriesLabel.text = goalCals
-        consumedCaloriesLabel.text = String(Int(round(consumedCals)))
+        let burnedCals: Int = defaults.value(forKey: "CaloriesBurnedDate") as? Int ?? 0
+        consumedCaloriesLabel.text = String(currentCals - burnedCals)
     }
 }
 
