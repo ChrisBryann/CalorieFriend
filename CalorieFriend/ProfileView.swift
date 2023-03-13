@@ -31,6 +31,7 @@ struct ProfileView: View {
     @State var sex = ""
     @State var goal = ""
     @State private var birthdate = Date()
+    var dismissedAction: (() -> Void)
 
     // Build Form for profile entry
     var body: some View {
@@ -104,13 +105,12 @@ struct ProfileView: View {
                 
                 Section() {
                     Button("Logout") {
-                        /*
                         do {
                             try Auth.auth().signOut()
-                            self.performSegue(withIdentifier: "ProfileToLogin", sender: self)
+                            self.dismissedAction()
                         } catch let logoutError as NSError {
                             print("Error logging out: \(logoutError)")
-                        }*/
+                        }
                     }
                 }
             }
