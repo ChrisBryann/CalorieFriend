@@ -99,7 +99,8 @@ struct ProfileView: View {
                         let now = Date()
                         let calendar = Calendar.current
                         let ageComponents = calendar.dateComponents([.year], from: birthdate, to: now)
-                        defaults.set(ageComponents.year!, forKey: Keys.userAge)
+                        let ageInt: Int = Int(ageComponents.year ?? 0)
+                        defaults.set(String(ageInt), forKey: Keys.userAge)
                     }
                 }
                 
@@ -182,7 +183,7 @@ func calculateTDEE() -> Int {
             tdee -= 500
         }
     }
-    
+
     return Int(tdee)
 }
 

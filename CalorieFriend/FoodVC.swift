@@ -15,7 +15,6 @@ class FoodVC: UITableViewController {
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
     @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
-        print("BUTTON CLICKED");
         search();
     }
     
@@ -30,7 +29,6 @@ class FoodVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
     }
     
     func configureTableView() {
@@ -62,30 +60,76 @@ class FoodVC: UITableViewController {
         return cell
     }
     
-    func getCalories() -> String {
-        let defaults = UserDefaults.standard
-        let goal = defaults.value(forKey: "userGoal")
+    func getParameters() -> String {
+        var parameters = ""
         
-        switch goal as? String {
-        case "Gain Weight (+500 kCals)":
-            return "&calories=500-700"
-        case "Maintain Current Weight (+0 kCals)":
-            return "&calories=300-500"
-        case "Lose Weight (-500 kCals)":
-            return "&calories=100-300"
-        default:
-            return ""
+        let defaults = UserDefaults.standard
+        let goalCals = calculateTDEE()
+        let burnedCalsData = defaults.array(forKey: "CaloriesBurnedData") as? [[String: Any]]
+        var burnedCals = 0
+        let consumedRecipes = defaults.array(forKey: "totalRecipe") as? [[String: Any]]
+        var consumedCals = 0
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        
+        let df = DateFormatter()
+        df.dateFormat = "dd/MM/yyyy"
+        let todayStr = df.string(from: date)
+        
+        let dictEmpty: Bool = consumedRecipes == nil
+        if (!dictEmpty) {
+            for data in consumedRecipes! {
+                let cals: Int = data["Cals"] as? Int ?? 0
+                let count: Int = data["Count"] as? Int ?? 0
+                consumedCals += (cals * count)
+            }
         }
+                
+        for data in burnedCalsData! {
+            let fullDate = data["date"] as? String ?? ""
+            if todayStr == fullDate.split(separator: " ")[0] {
+                burnedCals += data["calories"] as? Int ?? 0
+            }
+        }
+        
+        if (consumedCals - burnedCals) > goalCals {
+            let alert = UIAlertController(title: "Calorie Limit Exceeded", message: "You have exceeded your calorie intake for the day. Consider having a lower calorie meal.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        let recommendedCals = ((goalCals + burnedCals - consumedCals) / consumedRecipes!.count)
+        switch recommendedCals {
+        case 200...:
+            parameters += "&calories=\(recommendedCals - 200)-\(recommendedCals + 200)"
+        default:
+            parameters += ""
+        }
+        
+        switch hour as Int {
+        case 4..<10:
+            parameters += "&mealType=Breakfast"
+        case 10..<16:
+            parameters += "&mealType=Lunch"
+        case 16..<22:
+            parameters += "&mealType=Dinner"
+        default:
+            parameters += ""
+        }
+        
+        return parameters
     }
     
     func search() {
         let recipeManager = RecipeManager()
         let searchText = searchBar.text ?? nil
-        let calories = getCalories()
-        print(searchText ?? "EDIDI")
+        let parameters = getParameters()
         
         if (searchText != nil){
-            recipeManager.fetchRecipes(searchText: searchText!, calories: calories) { result in
+            recipeManager.fetchRecipes(searchText: searchText!, parameters: parameters) { result in
                 self.data = result
                 DispatchQueue.main.async { [self] in
                     tableView.reloadData()
@@ -104,8 +148,6 @@ extension FoodVC: RecipeCellDelegate {
         }
         
         let defaults = UserDefaults.standard
-        print("\(recipe.source ?? "1")")
-        print("\(recipe.calories ?? 0)")
         let recipeCalories : Double = recipe.calories ?? 0
         let recipeYield : Double = recipe.yield ?? 0
         
@@ -135,11 +177,7 @@ extension FoodVC: RecipeCellDelegate {
     }
     
     func didTapRecipeLinkButton(with recipe: Recipe) {
-        print("tapped recipe link")
         guard let url = URL(string: recipe.url!) else { return }
         UIApplication.shared.open(url)
-        
-        let defaults = UserDefaults.standard
-        defaults.set(0, forKey: "currentCals") // temp way to set current calories back to 0, remove later
     }
 }
