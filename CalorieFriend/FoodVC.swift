@@ -86,11 +86,14 @@ class FoodVC: UITableViewController {
                 consumedCals += (cals * count)
             }
         }
-                
-        for data in burnedCalsData! {
-            let fullDate = data["date"] as? String ?? ""
-            if todayStr == fullDate.split(separator: " ")[0] {
-                burnedCals += data["calories"] as? Int ?? 0
+        
+        let dictIsEmpty: Bool = burnedCalsData == nil
+        if (!dictIsEmpty){
+            for data in burnedCalsData! {
+                let fullDate = data["date"] as? String ?? ""
+                if todayStr == fullDate.split(separator: " ")[0] {
+                    burnedCals += data["calories"] as? Int ?? 0
+                }
             }
         }
         
@@ -101,7 +104,7 @@ class FoodVC: UITableViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        let recommendedCals = ((goalCals + burnedCals - consumedCals) / consumedRecipes!.count)
+        let recommendedCals = ((goalCals + burnedCals - consumedCals) / (3 - consumedRecipes!.count))
         switch recommendedCals {
         case 200...:
             parameters += "&calories=\(recommendedCals - 200)-\(recommendedCals + 200)"
@@ -125,11 +128,12 @@ class FoodVC: UITableViewController {
     
     func search() {
         let recipeManager = RecipeManager()
-        let searchText = searchBar.text ?? nil
+        let text = searchBar.text ?? ""
+        let searchText = text.replacingOccurrences(of: " ", with: "%20")
         let parameters = getParameters()
         
-        if (searchText != nil){
-            recipeManager.fetchRecipes(searchText: searchText!, parameters: parameters) { result in
+        if (searchText != ""){
+            recipeManager.fetchRecipes(searchText: searchText, parameters: parameters) { result in
                 self.data = result
                 DispatchQueue.main.async { [self] in
                     tableView.reloadData()
@@ -174,6 +178,10 @@ extension FoodVC: RecipeCellDelegate {
         }
     
         defaults.set(totalRecipe, forKey: "totalRecipe")
+        let alert = UIAlertController(title: "Recipe Added!", message: "", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func didTapRecipeLinkButton(with recipe: Recipe) {
