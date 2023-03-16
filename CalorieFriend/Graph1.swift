@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Firebase
 import SwiftUI
 import Charts
 
@@ -15,64 +15,93 @@ let dateFormatter = {
     formatter.dateFormat = "yyyy-MM-dd"
     return formatter
 }()
+let database = Database.database().reference()
+
+
+func getLastSevenDays() ->[String] {
+    var dates: [String] = []
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd"
+    for i in -7 ... -1{
+        dates.append(df.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+    }
+    return dates;
+
+}
+func getFromDatabse() async throws -> [(String, Int)] {
+    var scoresForLastSeven: [(String, Int)] = []
+    let dates: [String] = getLastSevenDays()
+    for date in dates {
+        let data = try await database.child(date).getData();
+        if let value = data.value as? [String: Any] {
+            let caloriesConsumedStr = value["Calories"] as! String
+            let goalStr = value["Goal"] as! String
+            if caloriesConsumedStr == "0" || goalStr == "0"{
+                scoresForLastSeven.append((date,0));
+                continue;
+            }
+            let caloriesConsumedDouble = Double(caloriesConsumedStr) ?? 0.0
+            let goalDouble = Double(goalStr) ?? 1.0
+            let score = Int(round(caloriesConsumedDouble/goalDouble * 100))
+            print(date, caloriesConsumedDouble, goalDouble, score)
+
+            scoresForLastSeven.append((date, score))
+        } else {
+            scoresForLastSeven.append((date,0))
+            continue;
+        }
+    }
+    return scoresForLastSeven
+}
 
 typealias Model = (date: Date, views: Int)
-
-let data: [Model] = [
-    ("2022-06-02",647),
-    ("2022-06-03",482),
-    ("2022-06-04",424),
-    ("2022-06-05",379),
-    ("2022-06-06",324),
-    ("2022-06-07",1278),
-    ("2022-06-08",746),
-    ("2022-06-09",503),
-    ("2022-06-10",380),
-    ("2022-06-11",267),
-    ("2022-06-12",330),
-    ("2022-06-13",379),
-    ("2022-06-14",1336),
-    ("2022-06-15",887),
-    ("2022-06-16",766),
-    ("2022-06-17",456),
-    ("2022-06-18",298),
-    ("2022-06-19",317),
-    ("2022-06-20",363),
-    ("2022-06-21",969),
-    ("2022-06-22",545),
-    ("2022-06-23",448),
-    ("2022-06-24",313),
-    ("2022-06-25",287),
-    ("2022-06-26",366),
-    ("2022-06-27",362),
-    ("2022-06-28",759),
-    ("2022-06-29",490),
-].map { (date: dateFormatter.date(from: $0.0)!, views: $0.1) }
-
-let average = data.map(\.views).reduce(0.0) {
-    return $0 + Double($1) / Double(data.count)
-}
 struct Graph1: View {
+    @State public var data:[Model]
     var body: some View {
+        
         if #available(iOS 16.0, *){
-            Chart(data, id: \.date) { dataPoint in
-                LineMark(
-                    x: .value("Day", dataPoint.date),
-                    y: .value("Views", dataPoint.views)
-                )
-                
-                RuleMark(y: .value("Average", average))
-                    .foregroundStyle(.red)
+            Chart{
+                RuleMark(y:.value("Goal", 100))
+                    .foregroundStyle(Color.mint)
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                    .annotation(alignment: .leading) {
+                        Text("Goal")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                ForEach(data, id: \.date) { dataPoint in
+                    BarMark(
+                        x: .value("Day", dataPoint.date, unit: .weekday),
+                        y: .value("Score", dataPoint.views)
+                    )
+                    .foregroundStyle(Color.pink.gradient)
+                    
+                    
+                }
             }
+            .task{
+                do{
+                    let scores = try await getFromDatabse()
+                    data = scores.map {(date: dateFormatter.date(from: $0.0)!, views: $0.1) }
+                    
+                    let y = print("IN GRAPH")
+                    let x = print(scores)
+                }
+                catch{
+                    print("Failed")
+                }
+            }
+            .chartXAxisLabel("Day", position:.bottom, alignment: .center)
+            .chartYAxisLabel("Score", position: .trailing, alignment: .center)
+            .chartYScale(domain: 0...105)
             .chartXAxis {
-                AxisMarks(values: .stride(by: .day)) { value in
-                    AxisGridLine()
+                AxisMarks(values:data.map{$0.date}){date in
                     AxisTick()
-                    AxisValueLabel(format: .dateTime.day())
+                    AxisValueLabel(format:.dateTime.day())
                 }
             }
             .chartYAxis {
-                AxisMarks(values: .stride(by: 250))
+                AxisMarks()
             }
         }
     }
