@@ -33,14 +33,12 @@ class HomeVC: UIViewController {
 
     }
     
-    // TODO TELL USERS TO ADD GOALS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let defaults = UserDefaults.standard
         let goalCals = defaults.string(forKey: "userTDEE") ?? "0"
         var currentCals = 0
-        //let consumedCals = defaults.double(forKey: "currentCals")
         
         // get calories burned - bryan
         if let healthStore = healthStore {
@@ -62,7 +60,10 @@ class HomeVC: UIViewController {
             firstItemAdded = false
         }
         
+        var burnedCals = 0
+        
         if (goalCals != "0"){
+            
             // get total calories from current food list
             let totalRecipe = defaults.array(forKey: "totalRecipe") as? [[String: Any]]
             let dictEmpty: Bool = totalRecipe == nil
@@ -74,20 +75,66 @@ class HomeVC: UIViewController {
                 }
             }
             
-            defaults.set(currentCals, forKey: "currentCals")
-            let consumedCaloriesInt = Int(currentCals)
+            // get todays burned calories
+            let date = Date()
+            
+            let df = DateFormatter()
+            df.dateFormat = "dd/MM/yyyy"
+            let todayStr = df.string(from: date)
+            
+            let burnedCalsData = defaults.array(forKey: "CaloriesBurnedData") as? [[String: Any]]
+            
+            let dictIsEmpty: Bool = burnedCalsData == nil
+            if (!dictIsEmpty){
+                for data in burnedCalsData! {
+                    let fullDate = data["date"] as? String ?? ""
+                    if todayStr == fullDate.split(separator: " ")[0] {
+                        burnedCals += data["calories"] as? Int ?? 0
+                    }
+                }
+            }
+            
+            print("burnedCals")
+            print(burnedCals)
+            
+            defaults.set((currentCals - burnedCals), forKey: "currentCals")
+            let caloriesInt = Int(currentCals - burnedCals)
             let goalCaloriesInt = Int(goalCals) ?? 1
-            let score = ((Double(consumedCaloriesInt)/Double(goalCaloriesInt)) * 100)
-            dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
+            var score = 0.0
+            if (caloriesInt > goalCaloriesInt) {
+                score = ((Double(goalCaloriesInt)/Double(caloriesInt)) * 100.0)
+                dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
+                switch score as Double {
+                case 0.0..<33.0:
+                    dailyPercentGoalLabel.textColor = .systemRed
+                case 33.0..<66:
+                    dailyPercentGoalLabel.textColor = .systemOrange
+                case 33..<100:
+                    dailyPercentGoalLabel.textColor = .systemYellow
+                default:
+                    dailyPercentGoalLabel.textColor = .label
+                }
+                
+                
+            } else {
+                score = ((Double(caloriesInt)/Double(goalCaloriesInt)) * 100.0)
+                if (score < 0.0) {
+                    dailyPercentGoalLabel.text = "0%"
+                    dailyPercentGoalLabel.textColor = .label
+                } else {
+                    dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
+                    dailyPercentGoalLabel.textColor = .systemGreen
+                }
+            }
+            
+            
         }else{
             dailyPercentGoalLabel.text = "0%"
+            dailyPercentGoalLabel.textColor = .label
         }
-
-        // TODO subtract calories burned
-        goalCaloriesLabel.text = goalCals
-        let burnedCals: Int = defaults.value(forKey: "CaloriesBurnedDate") as? Int ?? 0
-        consumedCaloriesLabel.text = String(currentCals - burnedCals)
         
+        goalCaloriesLabel.text = goalCals
+        consumedCaloriesLabel.text = String(currentCals - burnedCals)
         addToDatabse(goalCalories: goalCals, consumedCalories: String(currentCals - burnedCals))
             
     }
@@ -103,6 +150,7 @@ class HomeVC: UIViewController {
         ]
         database.child(todayStr).setValue(entry)
     }
+    
     private func getLastSevenDays() ->[String] {
         var dates: [String] = []
         let df = DateFormatter()
@@ -113,6 +161,7 @@ class HomeVC: UIViewController {
         return dates;
 
     }
+    
     public func getFromDatabse() async throws -> [(String, Int)] {
         var scoresForLastSeven: [(String, Int)] = []
         let dates: [String] = getLastSevenDays()
@@ -137,6 +186,7 @@ class HomeVC: UIViewController {
         }
         return scoresForLastSeven
     }
+    
     typealias Model = (date: String, views: Int)
     public func getFromDatabse() async throws -> [Model] {
         var scoresForLastSeven: [Model] = []
