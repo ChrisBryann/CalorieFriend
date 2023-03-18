@@ -98,7 +98,7 @@ class FoodVC: UITableViewController {
         }
         
         if (consumedCals - burnedCals) > goalCals {
-            let alert = UIAlertController(title: "Calorie Limit Exceeded", message: "You have exceeded your calorie intake for the day. Consider having a lower calorie meal.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Calorie Limit Exceeded", message: "You have exceeded your calorie intake for the day. Consider having a lower calorie meal or burning calories with exercise!", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default)
             alert.addAction(ok)
             self.present(alert, animated: true, completion: nil)
