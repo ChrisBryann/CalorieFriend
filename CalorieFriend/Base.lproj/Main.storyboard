@@ -317,7 +317,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-GH-kEe">
-                                <rect key="frame" x="76" y="508" width="238" height="206"/>
+                                <rect key="frame" x="76" y="508" width="237" height="205"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="ae5-Si-ry6" kind="embed" destinationCreationSelector="addSwiftUIView:" id="HvZ-pc-6Vy"/>

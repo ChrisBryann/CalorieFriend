@@ -104,7 +104,13 @@ class FoodVC: UITableViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        let recommendedCals = ((goalCals + burnedCals - consumedCals) / (3 - consumedRecipes!.count))
+        var recommendedCals = 0;
+        if (consumedRecipes!.count >= 3) {
+            recommendedCals = ((goalCals + burnedCals - consumedCals))
+        } else {
+            recommendedCals = ((goalCals + burnedCals - consumedCals) / (3 - consumedRecipes!.count))
+        }
+        
         switch recommendedCals {
         case 200...:
             parameters += "&calories=\(recommendedCals - 200)-\(recommendedCals + 200)"
