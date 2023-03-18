@@ -55,13 +55,15 @@ class HomeVC: UIViewController {
             })
         }
         
-        if (firstItemAdded && Calendar.current.isDateInYesterday(dateItemsAdded)) {
+        let today = Date()
+        let sameDay: Bool = Calendar.current.isDate(today, inSameDayAs: dateItemsAdded)
+        
+        if (firstItemAdded && !sameDay) {
             defaults.removeObject(forKey: "totalRecipe")
             firstItemAdded = false
         }
         
         var burnedCals = 0
-        
         if (goalCals != "0"){
             
             // get total calories from current food list
