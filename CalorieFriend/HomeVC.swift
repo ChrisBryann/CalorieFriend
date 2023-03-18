@@ -105,11 +105,11 @@ class HomeVC: UIViewController {
                 score = ((Double(goalCaloriesInt)/Double(caloriesInt)) * 100.0)
                 dailyPercentGoalLabel.text = String(Int(round(score))) + "%"
                 switch score as Double {
-                case 0.0..<33.0:
+                case 0.0..<60.0:
                     dailyPercentGoalLabel.textColor = .systemRed
-                case 33.0..<66:
+                case 60.0..<80.0:
                     dailyPercentGoalLabel.textColor = .systemOrange
-                case 33..<100:
+                case 80.0..<100:
                     dailyPercentGoalLabel.textColor = .systemYellow
                 default:
                     dailyPercentGoalLabel.textColor = .label
