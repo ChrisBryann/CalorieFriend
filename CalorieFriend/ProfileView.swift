@@ -101,6 +101,7 @@ struct ProfileView: View {
                         let ageComponents = calendar.dateComponents([.year], from: birthdate, to: now)
                         let ageInt: Int = Int(ageComponents.year ?? 0)
                         defaults.set(String(ageInt), forKey: Keys.userAge)
+                        defaults.set(calculateTDEE(), forKey: "userTDEE")
                     }
                 }
                 
