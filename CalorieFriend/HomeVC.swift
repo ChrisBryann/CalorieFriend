@@ -56,11 +56,19 @@ class HomeVC: UIViewController {
         }
         
         let today = Date()
+        let dateItemsAdded = defaults.value(forKey: "dateFirstAdded") as? Date ?? Date()
+        let firstItemAdded: Bool = defaults.value(forKey: "firstItemAdded") as? Bool ?? false
         let sameDay: Bool = Calendar.current.isDate(today, inSameDayAs: dateItemsAdded)
+        
+        print("date items added: ")
+        print(dateItemsAdded)
+        print("today")
+        print(today)
+        print(firstItemAdded)
         
         if (firstItemAdded && !sameDay) {
             defaults.removeObject(forKey: "totalRecipe")
-            firstItemAdded = false
+            defaults.set(false, forKey: "firstItemAdded")
         }
         
         var burnedCals = 0
