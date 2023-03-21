@@ -150,13 +150,16 @@ class HomeVC: UIViewController {
     }
     
     private func addToDatabse(goalCalories: String, consumedCalories: String) -> Void {
+        let defaults = UserDefaults.standard
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
         let todayStr = df.string(from: Date())
+        let foodListArray = defaults.array(forKey: "totalRecipe") as? [[String: Any]]
         
         let entry: [String: Any] = [
             "Goal": goalCalories as NSObject,
-            "Calories": consumedCalories
+            "Calories": consumedCalories,
+            "Food list": foodListArray!
         ]
         database.child(todayStr).setValue(entry)
     }
